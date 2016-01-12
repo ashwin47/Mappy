@@ -24,19 +24,25 @@ mapApp.controller('mapContainer',function($scope){
 		mapTypeId: google.maps.MapTypeId.TERRAIN
 	};
 
+    $scope.mapInit = function(){
+        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        $scope.markers = [];
+
+    },
 
 	$scope.getData = function (n){      // onclick 
     	//console.log(n);
-    	for (var i=0;i<n.length;i++){
+            $scope.mapInit(); // re init for refresh
+          	for (var i=0;i<n.length;i++){
     		console.log(n[i]);
     		$scope.createMarker($scope.data[n[i]-1]);
     	}
-    }
+    },
 
 
-    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    $scope.markers = [];
-
+    
+    
+    $scope.mapInit();
     $scope.createMarker = function (info){
 
     	var marker = new google.maps.Marker({
